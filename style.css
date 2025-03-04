@@ -1,0 +1,13 @@
+:root {
+    --background-base: #1e1e1e;
+    --background: #313133;
+    --foreground: #d4d4d4;
+    --button-primary: #007acc;
+    --input-background: #3c3c3c;
+}
+
+body {
+    background-color: var(--background-base);
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
