@@ -23,8 +23,9 @@ function processChat(text) {
     const graphMessagesByDefault = document.getElementById(
         "graphMessagesByDefault"
     );
+    createPieGraphForTotalMessages(calculateTotalMessages(chatData));
     if (graphMessagesByDefault && graphMessagesByDefault.checked) {
-        console.log(getMessageCountByDate(chatData));
+        console.log(chatData.slice(0, 11));
         createBarGraphsForEachYear(getMessageCountByDate(chatData));
     }
 

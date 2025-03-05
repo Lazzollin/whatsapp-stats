@@ -1,10 +1,13 @@
 function getMessageCountByDate(chatData) {
     const result = {};
+    const senders = new Set();
 
     chatData.forEach((chat) => {
         const year = new Date(chat.date).getFullYear();
         const month = new Date(chat.date).getMonth() + 1;
         const sender = chat.sender.toLowerCase();
+
+        senders.add(sender); // Track unique senders
 
         if (!result[year]) {
             result[year] = {};
@@ -23,31 +26,23 @@ function getMessageCountByDate(chatData) {
 
         result[year][month].total++;
 
-        if (sender === "laza") {
+        // Dynamically assign sender1 and sender2
+        if (!result[year][month].sender1name) {
+            result[year][month].sender1name = sender;
+        }
+
+        if (sender === result[year][month].sender1name) {
             result[year][month].sender1++;
-            result[year][month].sender1name = "laza";
-        } else if (sender === "juliet") {
-            result[year][month].sender2++;
-            result[year][month].sender2name = "juliet";
-        }
-
-        if (result[year][month].sender1 > result[year][month].sender2) {
-            result[year][month].mostSentBy = "sender1";
         } else {
-            result[year][month].mostSentBy = "sender2";
+            result[year][month].sender2++;
+            result[year][month].sender2name = sender;
         }
-    });
 
-    // Fill the missing sender names if they don't appear in the month
-    Object.keys(result).forEach((year) => {
-        Object.keys(result[year]).forEach((month) => {
-            if (!result[year][month].sender1name) {
-                result[year][month].sender1name = "laza";
-            }
-            if (!result[year][month].sender2name) {
-                result[year][month].sender2name = "juliet";
-            }
-        });
+        // Determine who sent more messages
+        result[year][month].mostSentBy =
+            result[year][month].sender1 > result[year][month].sender2
+                ? "sender1"
+                : "sender2";
     });
 
     return result;

@@ -1,13 +1,11 @@
-:root {
-    --background-base: #1e1e1e;
-    --background: #313133;
-    --foreground: #d4d4d4;
-    --button-primary: #007acc;
-    --input-background: #3c3c3c;
+.help-btn {
+    border: unset;
+    outline: unset;
+    border-radius: 50px;
+    height: 35px;
+    aspect-ratio: 1;
 }
 
-body {
-    background-color: var(--background-base);
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+#totalGraphContainer {
+    max-height: 300px;
 }
